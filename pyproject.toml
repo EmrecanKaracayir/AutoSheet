@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "autosheet"
+version = "0.1.0"
+description = "Library for finding datasheets for electronic components"
+authors = [{ name = "Emrecan Karaçayır", email = "developer@karacayir.com" }]
+license = { text = "MIT" }
+readme = "README.md"
+keywords = [
+    "datasheet",
+    "electronics",
+    "component",
+    "search",
+    "find",
+    "library",
+]
+dependencies = ["openocr"]
+
+[project.optional-dependencies]
+dev = ["black", "flake8", "pytest", "pytest-cov"]
+
+[tool.setuptools]
+packages = ["autosheet"]
+package-dir = { "" = "source" }
+
+[tool.pytest.ini_options]
+testpaths = "tests"
+pythonpath = "source"
+addopts = ["--cov=source", "--cov-report=term-missing"]
+
+[tool.black]
+line-length = 100
