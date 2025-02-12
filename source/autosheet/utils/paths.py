@@ -2,10 +2,15 @@ from pathlib import Path
 
 from autosheet.utils import constants
 
-DATA_PATH = Path("data")
-RESOURCES_PATH = Path("resources")
+RESOURCES_FOLDER: Path = Path("resources")
+FONT_FILE: Path = RESOURCES_FOLDER / constants.FONT_NAME
 
-DEBUG_PATH = DATA_PATH / "debug"
-FONT_PATH = RESOURCES_PATH / constants.FONT_NAME
-GLYPHS_PATH = DATA_PATH / "glyphs"
-DISTANCES_PATH = DATA_PATH / "distances.json"
+DATA_FOLDER: Path = Path("data")
+IMAGES_FOLDER: Path = DATA_FOLDER / "images"
+PDFS_FOLDER: Path = DATA_FOLDER / "pdfs"
+
+CACHE_FOLDER: Path = DATA_FOLDER / "cache"
+DEBUG_FOLDER: Path = CACHE_FOLDER / "debug"
+GLYPHS_FOLDER: Path = CACHE_FOLDER / "glyphs"
+DISTANCES_FILE: Path = CACHE_FOLDER / "distances.json"
+MATCHES_FILE: Path = CACHE_FOLDER / "matches.json"

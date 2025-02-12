@@ -1,33 +1,28 @@
 from autosheet.core import distance, glyph
 
 
-def test_get_distance():
-    test_glyph = "A"
-    test_mask = glyph.get_glyph_mask(test_glyph)
+def test_get_distance() -> None:
+    test_g1 = "A"
 
     # Compute the distance between the mask and itself
-    assert distance.get_distance(test_glyph, test_mask, test_glyph, test_mask) == 0
+    assert distance.get_distance(test_g1, test_g1) == 0
 
     # Compute the difference between two largely different masks
-    test_glyph1 = "A"
-    test_mask1 = glyph.get_glyph_mask(test_glyph1)
-    test_glyph2 = "B"
-    test_mask2 = glyph.get_glyph_mask(test_glyph2)
+    test_g1 = "A"
+    test_g2 = "B"
 
-    large_distance = distance.get_distance(test_glyph1, test_mask1, test_glyph2, test_mask2)
+    large_distance = distance.get_distance(test_g1, test_g2)
 
     # Reverse the order of the masks
-    reverse_distance = distance.get_distance(test_glyph2, test_mask2, test_glyph1, test_mask1)
+    reverse_distance = distance.get_distance(test_g2, test_g1)
 
     assert large_distance == reverse_distance
 
     # Compute the difference between two similar masks
-    test_glyph3 = "B"
-    test_mask3 = glyph.get_glyph_mask(test_glyph3)
-    test_glyph4 = "8"
-    test_mask4 = glyph.get_glyph_mask(test_glyph4)
+    test_g1 = "B"
+    test_g2 = "8"
 
-    small_distance = distance.get_distance(test_glyph3, test_mask3, test_glyph4, test_mask4)
+    small_distance = distance.get_distance(test_g1, test_g2)
 
     assert large_distance > small_distance
 
@@ -37,6 +32,4 @@ def test_get_distance():
         for j, g2 in enumerate(glyphs):
             if j < i:
                 continue
-            mask1 = glyph.get_glyph_mask(g1)
-            mask2 = glyph.get_glyph_mask(g2)
-            distance.get_distance(g1, mask1, g2, mask2)
+            distance.get_distance(g1, g2)

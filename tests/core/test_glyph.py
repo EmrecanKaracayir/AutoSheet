@@ -2,7 +2,7 @@ from autosheet.core import glyph
 from autosheet.utils import chars, constants, paths
 
 
-def test_get_glyph_mask():
+def test_get_glyph_mask() -> None:
     test_glyph = "A"
     mask = glyph.get_glyph_mask(test_glyph)
 
@@ -13,5 +13,5 @@ def test_get_glyph_mask():
 
     # Check if glyph is cached
     assert (
-        paths.GLYPHS_PATH / f"{chars.get_safe_name(test_glyph)}.{constants.IMAGE_FORMAT}"
+        paths.GLYPHS_FOLDER / f"{chars.get_safe_name(test_glyph)}.{constants.IMAGE_FORMAT}"
     ).exists()

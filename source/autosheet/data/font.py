@@ -1,11 +1,12 @@
 from PIL import ImageFont
+from PIL.ImageFont import FreeTypeFont
 
 from autosheet.utils import constants, paths
 
-_FONT = None
+_FONT: FreeTypeFont | None = None
 
 
-def get_font():
+def get_font() -> FreeTypeFont:
     """
     Get the font for rendering glyphs.
     """
@@ -16,5 +17,5 @@ def get_font():
         return _FONT
 
     # Load the font from the file system
-    _FONT = ImageFont.truetype(str(paths.FONT_PATH), constants.FONT_SIZE)
+    _FONT = ImageFont.truetype(str(paths.FONT_FILE), constants.FONT_SIZE)
     return _FONT

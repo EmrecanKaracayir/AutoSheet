@@ -29,11 +29,12 @@ clean:
 	find . -type d -name '__pycache__' -exec rm -rf {} +
 	find . -type f -name '*.pyc' -delete
 
-# Clean the data folder
-clean-data:
-	@echo "Cleaning the data folder..."
-	find data -type f -delete
-	find data -type l -delete
+# Clean the cache folder
+clean-cache:
+	@echo "Cleaning the cache folder..."
+	find data/cache -type f -delete
+	find data/cache -type l -delete
+
 
 # Format the code
 format:

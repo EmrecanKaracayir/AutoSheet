@@ -1,6 +1,6 @@
-DEBUG = True
-IMAGE_FORMAT = "png"
-FONT_NAME = "Korolev.ttf"
-CANVAS_SIZE = 256
-FONT_SIZE = CANVAS_SIZE * 0.8
-BLUR_RADIUS = CANVAS_SIZE / 20
+DEBUG: bool = True
+IMAGE_FORMAT: str = "png"
+FONT_NAME: str = "Korolev.ttf"
+CANVAS_SIZE: int = 256
+FONT_SIZE: int = CANVAS_SIZE * 0.8
+BLUR_RADIUS: int = CANVAS_SIZE / 20

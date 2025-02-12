@@ -1,4 +1,4 @@
-def get_safe_name(char):
+def get_safe_name(char: str) -> str:
     """
     Get a safe name and code for a given character.
     """

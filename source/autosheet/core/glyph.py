@@ -1,16 +1,17 @@
 import cv2
 import numpy as np
 from PIL import Image, ImageDraw, ImageFilter
+from PIL.ImageFont import FreeTypeFont
 
 from autosheet.data import font
 from autosheet.utils import chars, constants, paths
 
 
-def get_glyph_mask(glyph):
+def get_glyph_mask(glyph: str) -> np.ndarray:
     """
     Get the blurred mask for a given glyph. The mask is cached for future use.
     """
-    path = paths.GLYPHS_PATH / f"{chars.get_safe_name(glyph)}.{constants.IMAGE_FORMAT}"
+    path = paths.GLYPHS_FOLDER / f"{chars.get_safe_name(glyph)}.{constants.IMAGE_FORMAT}"
 
     # Load the cached glyph if it exists
     if path.exists():
@@ -23,8 +24,11 @@ def get_glyph_mask(glyph):
 
 
 def _render_glyph_mask(
-    glyph, size=constants.CANVAS_SIZE, font=font.get_font(), blur_radius=constants.BLUR_RADIUS
-):
+    glyph: str,
+    size: int = constants.CANVAS_SIZE,
+    font: FreeTypeFont = font.get_font(),
+    blur_radius: int = constants.BLUR_RADIUS,
+) -> np.ndarray:
     """
     Render a character as a blurred mask.
     """
