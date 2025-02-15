@@ -18,7 +18,7 @@ def get_matches() -> dict:
 
     # Load the matches from the cache file
     try:
-        with open(paths.MATCHES_FILE) as f:
+        with open(paths.get_path(paths.MATCHES_FILE)) as f:
             data = json.load(f)
         _MATCHES = {}
 
@@ -42,5 +42,5 @@ def save_matches() -> None:
     data = {subject: [d.to_dict() for d in distances] for subject, distances in _MATCHES.items()}
 
     # Save the matches to the cache file
-    with open(paths.MATCHES_FILE, "w") as f:
+    with open(paths.get_path(paths.MATCHES_FILE), "w") as f:
         json.dump(data, f, indent=2)

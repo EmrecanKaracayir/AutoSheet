@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "autosheet"
-version = "0.1.0"
+version = "1.0.0"
 description = "Library for finding datasheets for electronic components"
 authors = [{ name = "Emrecan Karaçayır", email = "developer@karacayir.com" }]
 license = { text = "MIT" }
@@ -17,10 +17,10 @@ keywords = [
     "find",
     "library",
 ]
-dependencies = ["openocr"]
+dependencies = ["easyocr", "wxPython"]
 
 [project.optional-dependencies]
-dev = ["black", "flake8", "pytest", "pytest-cov"]
+dev = ["black", "flake8", "pyinstaller", "pytest", "pytest-cov"]
 
 [tool.setuptools]
 packages = ["autosheet"]

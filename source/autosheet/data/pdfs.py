@@ -14,5 +14,7 @@ def get_pdf_names() -> list[str]:
         return _PDF_NAMES
 
     # Load the PDFs from the file system
-    _PDF_NAMES = [file.stem for file in paths.PDFS_FOLDER.iterdir() if file.is_file()]
+    _PDF_NAMES = [
+        file.stem for file in paths.get_path(paths.PDFS_FOLDER).iterdir() if file.is_file()
+    ]
     return _PDF_NAMES

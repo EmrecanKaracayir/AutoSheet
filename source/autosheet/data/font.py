@@ -17,5 +17,5 @@ def get_font() -> FreeTypeFont:
         return _FONT
 
     # Load the font from the file system
-    _FONT = ImageFont.truetype(str(paths.FONT_FILE), constants.FONT_SIZE)
+    _FONT = ImageFont.truetype(str(paths.get_path(paths.FONT_FILE)), constants.FONT_SIZE)
     return _FONT

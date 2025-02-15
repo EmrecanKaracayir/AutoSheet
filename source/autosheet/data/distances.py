@@ -18,7 +18,7 @@ def get_distances() -> dict:
 
     # Load the distances from the cache file
     try:
-        with open(paths.DISTANCES_FILE) as f:
+        with open(paths.get_path(paths.DISTANCES_FILE)) as f:
             data = json.load(f)
         _DISTANCES = {}
 
@@ -42,5 +42,5 @@ def save_distances() -> None:
     data = {subject: [d.to_dict() for d in distances] for subject, distances in _DISTANCES.items()}
 
     # Save the distances to the cache file
-    with open(paths.DISTANCES_FILE, "w") as f:
+    with open(paths.get_path(paths.DISTANCES_FILE), "w") as f:
         json.dump(data, f, indent=2)

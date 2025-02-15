@@ -55,7 +55,12 @@ def _compute_distance(g1: str, m1: np.ndarray, g2: str, m2: np.ndarray) -> float
         glyph1_name = chars.get_safe_name(g1)
         glyph2_name = chars.get_safe_name(g2)
         cv2.imwrite(
-            str(paths.DEBUG_FOLDER / f"{glyph1_name}-{glyph2_name}.{constants.IMAGE_FORMAT}"),
+            str(
+                paths.get_path(
+                    paths.DEBUG_DISTANCED_FOLDER
+                    / f"{glyph1_name}---{glyph2_name}.{constants.IMAGE_FORMAT}"
+                )
+            ),
             distance,
         )
 

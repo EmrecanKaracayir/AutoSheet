@@ -13,5 +13,7 @@ def test_get_glyph_mask() -> None:
 
     # Check if glyph is cached
     assert (
-        paths.GLYPHS_FOLDER / f"{chars.get_safe_name(test_glyph)}.{constants.IMAGE_FORMAT}"
+        paths.get_path(
+            paths.GLYPHS_FOLDER / f"{chars.get_safe_name(test_glyph)}.{constants.IMAGE_FORMAT}"
+        )
     ).exists()

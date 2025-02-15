@@ -1,4 +1,4 @@
-.PHONY: init install install-dev clean format lint test run
+.PHONY: init install install-dev clean format lint test run package
 
 # Constants
 VENV = .venv
@@ -18,13 +18,13 @@ install:
 # Install development dependencies
 install-dev:
 	@echo "Installing development dependencies..."
-	$(PIP) install .[dev]
+	$(PIP) install -e .[dev]
 
 # Clean the project
 clean:
 	@echo "Cleaning the project..."
-	rm -rf build
 	rm -rf .pytest_cache
+	rm -rf package
 	find . -type d -name '*.egg-info' -exec rm -rf {} +
 	find . -type d -name '__pycache__' -exec rm -rf {} +
 	find . -type f -name '*.pyc' -delete
@@ -44,7 +44,7 @@ format:
 # Lint the code
 lint:
 	@echo "Linting the code..."
-	$(VENV)/bin/flake8 source tests
+	$(VENV)/bin/flake8 source tests --max-line-length=100
 
 # Run the tests
 test:
@@ -55,3 +55,9 @@ test:
 run:
 	@echo "Running the application..."
 	$(PYTHON) source/autosheet/main.py
+
+# Package the application
+package:
+	@echo "Packaging the application..."
+	rm -rf package
+	pyinstaller source/autosheet/main.py --distpath ./package/dist --workpath ./package/build --clean --onedir --specpath ./package --name AutoSheet --add-data ../resources/:resources --add-data ../data:data --windowed --icon ../resources/icon.icns

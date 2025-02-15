@@ -11,7 +11,9 @@ def get_glyph_mask(glyph: str) -> np.ndarray:
     """
     Get the blurred mask for a given glyph. The mask is cached for future use.
     """
-    path = paths.GLYPHS_FOLDER / f"{chars.get_safe_name(glyph)}.{constants.IMAGE_FORMAT}"
+    path = paths.get_path(
+        paths.GLYPHS_FOLDER / f"{chars.get_safe_name(glyph)}.{constants.IMAGE_FORMAT}"
+    )
 
     # Load the cached glyph if it exists
     if path.exists():

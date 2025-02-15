@@ -1,4 +1,5 @@
 DEBUG: bool = True
+WINDOW_SIZE: tuple[int, int] = (300, 440)
 IMAGE_FORMAT: str = "png"
 FONT_NAME: str = "Korolev.ttf"
 CANVAS_SIZE: int = 256

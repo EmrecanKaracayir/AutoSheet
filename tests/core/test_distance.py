@@ -1,4 +1,4 @@
-from autosheet.core import distance, glyph
+from autosheet.core import distance
 
 
 def test_get_distance() -> None:
@@ -28,6 +28,7 @@ def test_get_distance() -> None:
 
     # Compute all glyph differences
     glyphs = list("0123456789") + list("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+    glyphs.append("")
     for i, g1 in enumerate(glyphs):
         for j, g2 in enumerate(glyphs):
             if j < i:
