@@ -4,11 +4,13 @@
 VENV_NAME = .venv
 
 ifeq ($(OS),Windows_NT)
+	PYTHON_INTERPRETER = python
 	VENV = $(VENV_NAME)/Scripts
 	PYTHON = $(VENV)/python.exe
 	PIP = $(VENV)/pip.exe
 	SEP = ;
 else
+	PYTHON_INTERPRETER := $(shell command -v python3 > /dev/null 2>&1 && echo python3 || echo python)
 	VENV = $(VENV_NAME)/bin
 	PYTHON = $(VENV)/python
 	PIP = $(VENV)/pip
@@ -18,7 +20,7 @@ endif
 # Initialize the virtual environment
 init:
 	@echo "Initializing virtual environment..."
-	python3 -m venv $(VENV_NAME)
+	$(PYTHON_INTERPRETER) -m venv $(VENV_NAME)
 
 
 # Install production dependencies
