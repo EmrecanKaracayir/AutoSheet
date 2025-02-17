@@ -21,7 +21,7 @@ endif
 init:
 	@echo "Initializing virtual environment..."
 	$(PYTHON_INTERPRETER) -m venv $(VENV_NAME)
-	$(PYTHON) scripts/create_cache.py
+	$(PYTHON) scripts/create_folders.py
 
 
 # Install production dependencies

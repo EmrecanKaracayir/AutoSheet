@@ -1,6 +1,7 @@
 .pytest_cache
 .vscode
 .venv
+data/cache
 package
 
 *.egg-info
