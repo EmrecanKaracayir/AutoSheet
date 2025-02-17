@@ -19,3 +19,5 @@ SELECT_IMAGE_BTN_LABEL: str = "Select Image"
 OPEN_DATASHEET_BTN_LABEL: str = "Open Datasheet"
 
 FILE_DIALOG_TITLE: str = "Select an image"
+
+ERROR_DIALOG_TITLE: str = "Error"

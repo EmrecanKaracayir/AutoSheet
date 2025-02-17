@@ -157,7 +157,7 @@ class Window(wx.Frame):
                         target=self.do_operations, args=(image_path,), daemon=True
                     ).start()
                 except Exception as e:
-                    wx.MessageBox(str(e), "Error", wx.ICON_ERROR | wx.OK)
+                    wx.MessageBox(str(e), strings.ERROR_DIALOG_TITLE, wx.ICON_ERROR | wx.OK)
                 finally:
                     wx.EndBusyCursor()
                     self.set_initial_state()
@@ -170,41 +170,50 @@ class Window(wx.Frame):
         """
         Perform the operations in a separate thread.
         """
-        # Show the steps label and the gauge
-        wx.CallAfter(self.steps_label.Show)
-        wx.CallAfter(self.gauge.Show)
-        wx.CallAfter(self.result_label.SetLabel, strings.RESULT_LAVEL_ANALYZING)
-        wx.CallAfter(self.panel.Layout)
+        try:
+            # Show the steps label and the gauge
+            wx.CallAfter(self.steps_label.Show)
+            wx.CallAfter(self.gauge.Show)
+            wx.CallAfter(self.result_label.SetLabel, strings.RESULT_LAVEL_ANALYZING)
+            wx.CallAfter(self.panel.Layout)
 
-        # Step 1: Load the image
-        wx.CallAfter(self.steps_label.SetLabel, strings.STEPS_LABEL_1_LOADING)
-        raw_image = operations.load_image(image_path)
-        wx.CallAfter(self.gauge.SetValue, 25)
-        wx.CallAfter(self.panel.Layout)
+            # Step 1: Load the image
+            wx.CallAfter(self.steps_label.SetLabel, strings.STEPS_LABEL_1_LOADING)
+            raw_image_name, raw_image = operations.load_image(image_path)
+            wx.CallAfter(self.gauge.SetValue, 25)
+            wx.CallAfter(self.panel.Layout)
 
-        # Step 2: Process the image
-        wx.CallAfter(self.steps_label.SetLabel, strings.STEPS_LABEL_2_PROCESSING)
-        processed_image = operations.process_image(image_path.stem, raw_image)
-        wx.CallAfter(self.gauge.SetValue, 50)
-        wx.CallAfter(self.panel.Layout)
+            # Step 2: Process the image
+            wx.CallAfter(self.steps_label.SetLabel, strings.STEPS_LABEL_2_PROCESSING)
+            processed_image = operations.process_image(raw_image_name, raw_image)
+            wx.CallAfter(self.gauge.SetValue, 50)
+            wx.CallAfter(self.panel.Layout)
 
-        # Step 3: Recognize text
-        wx.CallAfter(self.steps_label.SetLabel, strings.STEPS_LABEL_3_RECOGNIZING)
-        raw_image_text, processed_image_text = operations.recognize_text(raw_image, processed_image)
-        wx.CallAfter(self.gauge.SetValue, 75)
-        wx.CallAfter(self.panel.Layout)
+            # Step 3: Recognize text
+            wx.CallAfter(self.steps_label.SetLabel, strings.STEPS_LABEL_3_RECOGNIZING)
+            raw_image_text, processed_image_text = operations.recognize_text(
+                raw_image, processed_image
+            )
+            wx.CallAfter(self.gauge.SetValue, 75)
+            wx.CallAfter(self.panel.Layout)
 
-        # Step 4: Find datasheet
-        wx.CallAfter(self.steps_label.SetLabel, strings.STEPS_LABEL_4_FINDING)
-        self.pdf_path = operations.find_datasheet(raw_image_text, processed_image_text)
-        wx.CallAfter(self.gauge.SetValue, 100)
-        wx.CallAfter(self.panel.Layout)
+            # Step 4: Find datasheet
+            wx.CallAfter(self.steps_label.SetLabel, strings.STEPS_LABEL_4_FINDING)
+            self.pdf_path = operations.find_datasheet(raw_image_text, processed_image_text)
+            wx.CallAfter(self.gauge.SetValue, 100)
+            wx.CallAfter(self.panel.Layout)
 
-        # Done
-        wx.CallAfter(self.steps_label.SetLabel, strings.STEPS_LABEL_5_DONE)
-        wx.CallAfter(self.result_label.SetLabel, f"{strings.RESULT_LABEL_DONE}{self.pdf_path.stem}")
-        wx.CallAfter(self.open_datasheet_btn.Enable)
-        wx.CallAfter(self.panel.Layout)
+            # Done
+            wx.CallAfter(self.steps_label.SetLabel, strings.STEPS_LABEL_5_DONE)
+            wx.CallAfter(
+                self.result_label.SetLabel, f"{strings.RESULT_LABEL_DONE}{self.pdf_path.stem}"
+            )
+            wx.CallAfter(self.open_datasheet_btn.Enable)
+            wx.CallAfter(self.panel.Layout)
+        except Exception as e:
+            # Show the error message
+            wx.CallAfter(self.set_initial_state)
+            wx.CallAfter(wx.MessageBox, str(e), strings.ERROR_DIALOG_TITLE, wx.ICON_ERROR | wx.OK)
 
     def on_open_datasheet_btn_clicked(self, _: wx.Event) -> None:
         """

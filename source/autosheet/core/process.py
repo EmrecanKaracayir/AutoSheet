@@ -46,7 +46,7 @@ def get_processed(name: str, image: Image.Image) -> np.ndarray:
     return deskewed_image
 
 
-def _resize_image(image: Image.Image) -> Image.Image:
+def _resize_image(image: Image.Image) -> np.ndarray:
     """
     Resize the input image to a maximum width of 1024 pixels.
     """
@@ -60,14 +60,14 @@ def _resize_image(image: Image.Image) -> Image.Image:
     else:
         resized_image = image
 
-    return resized_image
+    return np.array(resized_image)
 
 
-def _grayscale_image(image: Image.Image) -> np.ndarray:
+def _grayscale_image(image: np.ndarray) -> np.ndarray:
     """
     Convert the image from BGR to grayscale.
     """
-    return cv2.cvtColor(np.array(image), cv2.COLOR_BGR2GRAY)
+    return cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
 
 def _gamma_adjust_image(image: np.ndarray) -> np.ndarray:
@@ -182,9 +182,10 @@ def _debug_image(image: np.ndarray, name: str, step: int) -> None:
             step_text = "unknown"
 
     # Save the image
-    cv2.imwrite(
-        paths.get_path(
-            paths.DEBUG_PROCESSED_FOLDER / f"{name}_{step}_{step_text}.{constants.IMAGE_FORMAT}"
-        ),
-        image,
-    )
+    if constants.DEBUG:
+        cv2.imwrite(
+            paths.get_path(
+                paths.DEBUG_PROCESSED_FOLDER / f"{name}_{step}_{step_text}.{constants.IMAGE_FORMAT}"
+            ),
+            image,
+        )

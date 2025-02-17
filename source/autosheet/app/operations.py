@@ -11,7 +11,7 @@ from autosheet.data import image
 from autosheet.utils import paths
 
 
-def load_image(image_path: Path) -> Image.Image:
+def load_image(image_path: Path) -> tuple[str, Image.Image]:
     """
     Copy and load the image from the given path.
     """
