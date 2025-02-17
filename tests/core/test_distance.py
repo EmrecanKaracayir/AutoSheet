@@ -1,7 +1,12 @@
 from autosheet.core import distance
+from autosheet.utils import constants
 
 
 def test_get_distance() -> None:
+    # Set debug mode to True
+    constants.DEBUG = True
+
+    # Start testing
     test_g1 = "A"
 
     # Compute the distance between the mask and itself

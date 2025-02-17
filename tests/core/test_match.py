@@ -1,7 +1,12 @@
 from autosheet.core import match
+from autosheet.utils import constants
 
 
 def test_get_match() -> None:
+    # Set debug mode to True
+    constants.DEBUG = True
+
+    # Start testing
     test_subject = "74LS0O"
     assert match.get_match(test_subject)[0] == "74LS00"
 

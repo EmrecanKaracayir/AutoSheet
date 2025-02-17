@@ -21,6 +21,7 @@ endif
 init:
 	@echo "Initializing virtual environment..."
 	$(PYTHON_INTERPRETER) -m venv $(VENV_NAME)
+	$(PYTHON) scripts/create_cache.py
 
 
 # Install production dependencies
@@ -81,4 +82,4 @@ run-dev:
 package:
 	@echo "Packaging the application..."
 	$(PYTHON) scripts/clean_package.py
-	pyinstaller source/autosheet/main.py --distpath ./package/dist --workpath ./package/build --clean --onedir --specpath ./package --name AutoSheet --add-data ../resources/${SEP}resources --add-data ../data${SEP}data --windowed --icon ../resources/icon.icns
+	pyinstaller source/autosheet/main.py --distpath ./package/dist --workpath ./package/build --clean --onedir --specpath ./package --name AutoSheet --add-data "../resources/${SEP}resources" --add-data "../data${SEP}data" --windowed --icon ../resources/icon.icns

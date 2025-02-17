@@ -3,6 +3,10 @@ from autosheet.utils import chars, constants, paths
 
 
 def test_get_glyph_mask() -> None:
+    # Set debug mode to True
+    constants.DEBUG = True
+
+    # Start testing
     test_glyph = "A"
     mask = glyph.get_glyph_mask(test_glyph)
 
