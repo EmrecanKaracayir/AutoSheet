@@ -6,7 +6,9 @@ from autosheet.utils import constants, paths
 
 
 def get_processed(name: str, image: Image.Image) -> np.ndarray:
-    """ """
+    """
+    Process the input image to extract text regions.
+    """
     # 1. Resize image
     resized_image = _resize_image(image)
     _debug_image(resized_image, name, 1)
