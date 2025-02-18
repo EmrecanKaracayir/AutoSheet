@@ -17,10 +17,6 @@ def get_distance(g1: str, g2: str) -> float:
     subject = min(g1, g2)
     target = max(g1, g2)
 
-    # Get the masks for the two glyphs
-    m1 = glyph.get_glyph_mask(g1)
-    m2 = glyph.get_glyph_mask(g2)
-
     # If the subject is not in the cache, add it
     if subject not in cache:
         cache[subject] = []
@@ -29,6 +25,10 @@ def get_distance(g1: str, g2: str) -> float:
     for distance in cache[subject]:
         if distance.target == target:
             return distance.distance
+
+    # Get the masks for the two glyphs
+    m1 = glyph.get_glyph_mask(g1)
+    m2 = glyph.get_glyph_mask(g2)
 
     # Compute the distance between the two images and save it to the cache
     distance = _compute_distance(g1, m1, g2, m2)
